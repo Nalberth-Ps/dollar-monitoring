@@ -1,0 +1,16 @@
+services:
+  python-app:
+    build:
+      context: ./python-app
+    volumes:
+      - ./data:/data
+    depends_on:
+      - node-server
+
+  node-server:
+    build:
+      context: ./node-server
+    ports:
+      - "3000:3000"
+    volumes:
+    - ./data:/app/data
