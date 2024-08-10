@@ -13,4 +13,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-    - ./data:/app/data
+    - ./data:/usr/src/app/dist/data
+    environment:
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+    env_file:
+      - node-server\.env

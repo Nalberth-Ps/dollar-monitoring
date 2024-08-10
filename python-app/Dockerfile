@@ -1,4 +1,3 @@
-# Use a imagem base do Python
 FROM python:3.12
 
 # Instale o cron e dos2unix
@@ -32,8 +31,7 @@ RUN chmod 0644 /etc/cron.d/dollar-monitoring-cron
 RUN mkdir -p /var/log/cron
 RUN touch /var/log/cron/cron.log /var/log/cron_debug.log
 
-# Adicione o cron job ao cron spool
-RUN crontab /etc/cron.d/dollar-monitoring-cron
+COPY scripts/entrypoint.sh /scripts/entrypoint.sh
+RUN chmod +x /scripts/entrypoint.sh
 
-# Comando para rodar o cron em segundo plano, executar run_all.sh e manter o contêiner ativo
-CMD service cron start && /bin/bash /scripts/run_all.sh && tail -f /var/log/cron/cron.log
+CMD ["/scripts/entrypoint.sh"]

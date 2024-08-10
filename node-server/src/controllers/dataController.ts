@@ -8,7 +8,6 @@ function ensureDirectoryExists(dirPath: string): void {
   }
 }
 
-
 function loadExistingData(filePath: string): any[] {
   if (fs.existsSync(filePath)) {
     const rawData = fs.readFileSync(filePath);
@@ -35,6 +34,19 @@ export const handleDatasetUpload = (req: Request, res: Response) => {
     const existingData = loadExistingData(dataFilePath);
     const newData = req.body;
 
+    // Verificar se o último dado existente é igual ao novo dado
+    if (existingData.length > 0) {
+      const lastExistingData = existingData[existingData.length - 1];
+      const lastNewData = newData[newData.length - 1];
+
+      // Verifica se o último novo dado é igual ao último existente
+      if (lastExistingData?.price === lastNewData?.price && lastExistingData?.percentChange === lastNewData?.percentChange) {
+        console.log('Dados idênticos ao último registro, não serão adicionados.');
+        return res.status(200).send('No new data to add.');
+      }
+    }
+
+    // Adicionar novos dados ao arquivo
     existingData.push(...newData);
     saveData(dataFilePath, existingData);
 
