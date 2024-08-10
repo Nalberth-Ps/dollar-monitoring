@@ -83,7 +83,7 @@ const verifyDollarValue = async () => {
     events = events.filter(event => {
       console.log(`Verificando evento: ${event.phoneNumber} - Alvo: R$${event.targetValue}`)
 
-      if (latestDollarValue < event.targetValue) return true
+      if (latestDollarValue > event.targetValue) return true
 
       const notificationMessage = `Alerta! O dólar atingiu R$${latestDollarValue}, conforme o valor de R$${event.targetValue} que você definiu.`
       sendSMS(event.phoneNumber, notificationMessage)
