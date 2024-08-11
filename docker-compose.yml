@@ -1,22 +1,18 @@
 services:
   python-app:
-    build:
-      context: ./python-app
+    image: nalberth/python-app:latest
     volumes:
       - ./data:/data
     depends_on:
       - node-server
 
   node-server:
-    build:
-      context: ./node-server
+    image: nalberth/node-server:latest
     ports:
       - "3000:3000"
     volumes:
-    - ./data:/usr/src/app/dist/data
+      - ./data:/usr/src/app/dist/data
     environment:
-      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
-      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
-      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
-    env_file:
-      - node-server\.env
+      TWILIO_PHONE_NUMBER: +19388677873
+      TWILIO_ACCOUNT_SID: AC6d4cb78df0edddd94dd9b3e88ed781ca
+      TWILIO_AUTH_TOKEN: 1e7faf19ec5579d06fc86756eeb02357

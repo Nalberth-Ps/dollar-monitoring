@@ -1,11 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import dataRouter from './routes/data';
 import graphRouter from './routes/graph';
 import notifyRouter from './routes/notify'; // Importando o novo roteador
 
 const app = express();
 const port = 3000;
+
+console.log('Iniciando servidor...');
+// Middleware para CORS
+app.use(cors()); // Adiciona CORS com permissões para todas as origens
 
 // Middleware para processar JSON e dados de formulário
 app.use(bodyParser.json());

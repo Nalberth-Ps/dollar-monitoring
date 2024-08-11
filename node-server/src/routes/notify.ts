@@ -8,9 +8,9 @@ dotenv.config()
 
 const router = express.Router()
 
-const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER!
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID!
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN!
+const TWILIO_PHONE_NUMBER = '+19388677873'
+const TWILIO_ACCOUNT_SID = 'AC6d4cb78df0edddd94dd9b3e88ed781ca'
+const TWILIO_AUTH_TOKEN = '1e7faf19ec5579d06fc86756eeb02357'
 
 if (!TWILIO_PHONE_NUMBER || !TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN)
   throw new Error('Variáveis de ambiente Twilio não configuradas corretamente.')
@@ -96,6 +96,7 @@ const verifyDollarValue = async () => {
 }
 
 cron.schedule('*/1 * * * *', async () => {
+// cron.schedule('0 */2 * * *', async () => {
   console.log('Iniciando verificação do valor do dólar...')
   await verifyDollarValue()
 })

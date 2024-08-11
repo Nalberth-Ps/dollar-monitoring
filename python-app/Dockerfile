@@ -21,16 +21,11 @@ RUN chmod +x /scripts/*.sh
 # Converta os arquivos para o formato Unix
 RUN dos2unix /scripts/*.sh
 
-# Copie o arquivo de configuração do cron
-COPY cron/dollar-monitoring-cron /etc/cron.d/dollar-monitoring-cron
-
-# Dê permissão de execução ao arquivo cron
-RUN chmod 0644 /etc/cron.d/dollar-monitoring-cron
-
 # Crie os arquivos de log do cron
 RUN mkdir -p /var/log/cron
 RUN touch /var/log/cron/cron.log /var/log/cron_debug.log
 
+# Copie o script de entrada
 COPY scripts/entrypoint.sh /scripts/entrypoint.sh
 RUN chmod +x /scripts/entrypoint.sh
 

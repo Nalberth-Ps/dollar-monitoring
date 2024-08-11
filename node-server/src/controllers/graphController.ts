@@ -60,7 +60,7 @@ export function generateGraph(): string {
 
   // Add Y axis with a custom format to show more decimal places
   svg.append('g')
-    .call(d3.axisLeft(y).ticks(6).tickFormat(d => (d as number).toFixed(6))); // Converting to number before formatting
+    .call(d3.axisLeft(y).ticks(6).tickFormat(d => (d as number).toFixed(3))); // Converting to number before formatting
 
   // Add the line for price with smoother stroke
   svg.append('path')
