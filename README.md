@@ -8,13 +8,14 @@ Este README fornece instruções sobre como rodar as imagens Docker disponíveis
 
 ## Pré-requisitos 
 
-Certifique-se de que o Docker está instalado na sua máquina. Você pode verificar se o Docker está instalado e funcionando corretamente executando:
+Certifique-se de que o Docker e o Docker Compose estão instalados na sua máquina. Você pode verificar se ambos estão instalados e funcionando corretamente executando:
 
 
 ```bash
 docker --version
+docker-compose --version
 ```
-Se o Docker não estiver instalado, siga as instruções de instalação no [site oficial do Docker]() .
+Se o Docker ou Docker Compose não estiverem instalados, siga as instruções de instalação no [site oficial do Docker]() .
 ## Como Rodar as Imagens 
 
 ### 1. Criar uma Rede Docker Personalizada 
@@ -48,6 +49,37 @@ docker run -d --name python-app --network dolar_scraping nalberth/python-app
  
 - O nome do container será `python-app`.
 
+## Executar Usando Docker Compose 
+Se preferir, você pode usar `docker-compose` para simplificar o processo de execução dos containers. Para isso, siga os passos abaixo:
+### Passo 1: Executar o Docker Compose 
+No terminal, navegue até o diretório onde o arquivo `docker-compose.yml` está localizado e execute o comando:
+
+```bash
+docker-compose up -d
+```
+ 
+- Isso irá criar e iniciar os containers definidos no `docker-compose.yml`.
+ 
+- A rede `dolar_scraping` será criada automaticamente, e os containers serão configurados para se comunicar entre si.
+
+### Passo 2: Verificar os Containers em Execução 
+
+Você pode verificar o status dos containers usando o comando:
+
+
+```bash
+docker-compose ps
+```
+
+### Passo 3: Parar e Remover os Containers 
+
+Para parar os containers, use:
+
+
+```bash
+docker-compose down
+```
+Isso irá parar e remover todos os containers, mas os dados persistirão no diretório `./data`.
 ### Nota Importante 
 
 Se a imagem especificada não estiver presente no seu sistema local, o Docker fará automaticamente o download da imagem correspondente do Docker Hub antes de iniciar o container.

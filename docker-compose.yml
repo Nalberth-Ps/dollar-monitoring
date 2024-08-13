@@ -1,13 +1,13 @@
 services:
   python-app:
-    image: nalberth/python-app:latest
+    image: nalberth/python-app:0.0.2
     volumes:
       - ./data:/data
     depends_on:
       - node-server
 
   node-server:
-    image: nalberth/node-server:latest
+    image: nalberth/node-server:0.0.1
     ports:
       - "3000:3000"
     volumes:
